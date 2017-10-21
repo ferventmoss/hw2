@@ -6,12 +6,12 @@ from math import exp
 from math import log
 
 def parseData(fname):
-  for l in urlopen(fname):
+  for l in open(fname):
     yield eval(l)
 
-print("Reading data...")
-data = list(parseData("http://jmcauley.ucsd.edu/cse190/data/beer/beer_50000.json"))
-print("done")
+print "Reading data..."
+data = list(parseData("beer_50000.json"))
+print "done"
 
 def feature(datum):
   feat = [1, datum['review/taste'], datum['review/appearance'], datum['review/aroma'], datum['review/palate'], datum['review/overall']]
