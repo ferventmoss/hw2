@@ -58,6 +58,22 @@ def fprime(theta, X, y, lam, a = 0, b = 0):
     dl[k] -= lam*2*theta[k]
   return numpy.array([-x for x in dl])
 
+# NEGATIVE Log-likelihood
+def fWithWeight(theta, X, y, lam, a, b):
+  loglikelihood = 0
+  for i in range(len(X)):
+    logit = inner(X[i], theta)
+    if y[i]:
+      loglikelihood -= (a * log(1 + exp(-logit)))
+    if not y[i]:
+      loglikelihood -= (b * log(1 + exp(-logit)))
+      loglikelihood -= (b * logit)
+  for k in range(len(theta)):
+    loglikelihood -= lam * theta[k]*theta[k]
+  # for debugging
+  # print("ll =" + str(loglikelihood))
+  return -loglikelihood
+
 # NEGATIVE Derivative of log-likelihood with Weight
 def fprimeWithWeight(theta, X, y, lam, a, b):
   dl = [0.0]*len(theta)
@@ -80,7 +96,7 @@ def train(lam, X, y):
   theta,_,_ = scipy.optimize.fmin_l_bfgs_b(f, [0]*len(X[0]), fprime, pgtol = 10, args = (X, y, lam))
   return theta
 def trainWithWeight(lam, X, y, a, b):
-  theta,_,_ = scipy.optimize.fmin_l_bfgs_b(f, [0]*len(X[0]), fprimeWithWeight, pgtol = 10, args = (X, y, lam, a, b))
+  theta,_,_ = scipy.optimize.fmin_l_bfgs_b(fWithWeight, [0]*len(X[0]), fprimeWithWeight, pgtol = 10, args = (X, y, lam, a, b))
   return theta
 
 ##################################################
@@ -136,4 +152,19 @@ def prepData2():
 
     X = [feature2(d, indexer) for d in data]
     y = [d['beer/ABV'] >= 6.5 for d in data]
+    return X, y
+
+def prepData3():
+    print "Reading data..."
+    data = list(parseData("beer_50000.json"))
+    print "done"
+    words = ["lactic", "tart", "sour", "citric", "sweet", "acid", "hop", "fruit", "salt", "spicy"]
+    indexer = {}
+    index = 0
+    for word in words:
+        indexer[word] = index
+        index += 1
+
+    X = [feature2(d, indexer) for d in data]
+    y = [d['beer/style'] == 'American IPA' for d in data]
     return X, y

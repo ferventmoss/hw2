@@ -1,0 +1,147 @@
+#1
+train
+lambda = 1.0:	accuracy=0.669866794672
+validate
+lambda = 1.0:	accuracy=0.90027601104
+test
+lambda = 1.0:	accuracy=0.577813774898
+
+#2
+lambda = 1.0:	accuracy=0.541041641666
+lambda = 1.0:	accuracy=0.561742469699
+lambda = 1.0:	accuracy=0.645188384929
+
+#3
+ran on Q1
+tp = 4910, tn = 4721, fp = 6034, fn = 1003
+ber = 0.365333811678
+
+ran on Q2
+tp = 3166, tn = 5621, fp = 5134, fn = 2747
+ber = 0.47096448008
+
+#4
+adjusted class imbalance by giving more weight to 
+classes that are less prevalant and vice versa.
+code was changed in 'fprimeWithWeight' function
+
+Train
+    Class Imbalance Not Corrected
+    tp = 5253, tn = 3764, fp = 3554, fn = 4095
+    len(y) = 16666, len(X) = 16666
+    ber = 0.461856717447
+    lambda = 1.0:	accuracy=0.541041641666
+
+    Class Imbalance Corrected
+    tp = 3757, tn = 5190, fp = 2128, fn = 5591
+    len(y) = 16666, len(X) = 16666
+    ber = 0.444442841334
+    accuracy=0.536841473659
+
+Validation
+    Class Imbalance Not Corrected
+    tp = 8827, tn = 339, fp = 419, fn = 7081
+    len(y) = 16666, len(X) = 16666
+    ber = 0.498946199884
+    lambda = 1.0:	accuracy=0.54998199928
+
+    Class Imbalance Corrected
+    tp = 6413, tn = 573, fp = 185, fn = 9495
+    len(y) = 16666, len(X) = 16666
+    ber = 0.420466412081
+    accuracy=0.419176767071
+
+Test
+    Class Imbalance Not Corrected
+    tp = 3166, tn = 5621, fp = 5134, fn = 2747
+    len(y) = 16668, len(X) = 16668
+    ber = 0.47096448008
+    lambda = 1.0:	accuracy=0.527177825774
+
+    Class Imbalance Corrected
+    tp = 2397, tn = 7549, fp = 3206, fn = 3516
+    len(y) = 16668, len(X) = 16668
+    ber = 0.446357964544
+    accuracy=0.596712263019
+
+#5
+Train data shows no differences in
+different lamda from 0 to 1, and they show the best result.
+This trend is also shown in the validation set.
+lamdas from 0, 0.01, 0.1, 1 show same ber value.
+among the lamdas above, 1 is the best choice of lamda by following occam's razor
+Test set confirms the choice
+Train
+    lamda = 0
+    ber = 0.444442841334
+    lamda = 0.01
+    ber = 0.444442841334
+    lamda = 0.1
+    ber = 0.444442841334
+    lamda = 1
+    ber = 0.444442841334
+    lamda = 100
+    ber = 0.443610490624
+    lamda = 1000
+    ber = 0.443827188322
+Validation
+    ber = 0.420466412081
+    lamda = 0.01
+    ber = 0.420466412081
+    lamda = 0.1
+    ber = 0.420466412081
+    lamda = 1
+    ber = 0.420466412081
+    lamda = 100
+    ber = 0.420748459314
+    lamda = 1000
+    ber = 0.420622321754
+Test
+    lamda = 0
+    ber = 0.446357964544
+    lamda = 0.01
+    ber = 0.446357964544
+    lamda = 0.1
+    ber = 0.446357964544
+    lamda = 1
+    ber = 0.446357964544
+    lamda = 100
+    ber = 0.447021278553
+    lamda = 1000
+    ber = 0.447109871378
+#6
+    [[ -7.61829498e-04   9.67903522e-04  -1.20659582e-02   1.22129184e-02
+        4.72976524e-01  -3.22321014e-05   8.78492262e-01   5.93469606e-02
+       -1.21867430e-04   2.69483759e-02]
+     [  1.55627315e-03   8.69025779e-03   7.62598978e-03  -5.57589095e-03
+        8.79624170e-01  -5.58225425e-04  -4.74983274e-01   2.17431280e-02
+        8.70381547e-04   3.34474951e-03]
+     [  4.83727418e-03   4.96594440e-02   9.48642354e-02   2.01674767e-03
+       -4.83973741e-02  -5.25845938e-04  -4.14460754e-02   9.90418678e-01
+        6.63441639e-04   5.93067699e-02]
+     [ -8.30480452e-05   2.65550717e-02  -4.50394712e-04   1.28162321e-02
+       -1.30027956e-02  -2.10126762e-04  -1.95848629e-02  -6.24913558e-02
+        2.49206434e-03   9.97329584e-01]
+     [  2.22901484e-02   2.11513011e-01   9.71502941e-01  -4.08554258e-04
+        2.34095432e-03   3.21400962e-03   1.91210441e-02  -1.02179999e-01
+        2.10493611e-04  -1.11822513e-02]
+     [  3.30735087e-02   9.74875302e-01  -2.16189955e-01   1.43080483e-02
+       -6.02942035e-03   5.40995624e-03   1.70912591e-03  -2.69105958e-02
+        2.50964846e-03  -2.79723040e-02]
+     [  1.11243501e-02  -1.47104808e-02   3.32022522e-03   9.99654140e-01
+       -5.28317193e-04   8.16887071e-04  -1.30484599e-02  -1.47571580e-03
+        1.70348994e-03  -1.28116697e-02]
+     [  9.99094517e-01  -3.71202317e-02  -1.50502866e-02  -1.15898338e-02
+       -6.17958878e-04   7.95108513e-03   1.26728770e-03  -1.59325010e-03
+       -1.53668782e-03   1.13621723e-03]
+     [ -8.20451690e-03  -5.60307238e-03  -1.78298043e-03  -7.94600501e-04
+        5.10301475e-04   9.99944090e-01  -3.34576460e-04   1.01081826e-03
+       -2.77698915e-03   4.38947095e-04]
+     [  1.40143655e-03  -2.64526350e-03   2.34411442e-04  -1.78569873e-03
+       -6.27457521e-04   2.77479861e-03   6.11720309e-04  -4.21133555e-04
+        9.99986630e-01  -2.42707165e-03]]
+#7
+The below is the variances of disgraded dimensions
+[ 0.11435731  0.08779422  0.06331481  0.0310303   0.02279281  0.00778455
+  0.00257264  0.00143706]
+Reconsruction error is the sum of those variances: 0.331083690813
